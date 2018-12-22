@@ -10,7 +10,7 @@
 	* According to him each framework is suited for particular kind for problem, e.g. pytorch for GANs and cafe for when we need speed.
 * Started Coursera's deeplearning.ai CNN course by Andrew Ng
 ## 19 Dec:
-* Got access to DGX
+* Got access to DGX (Nvidia supercomputer)
 ## 20 Dec:
 * [CS231n Winter 2016: Lecture 4: Backpropagation, Neural Networks 1](https://www.youtube.com/watch?v=i94OvYb6noo): I you are like me and have learned most of DL from Deeplearningl.ai course then chances are you might not feel comfortable enough in back propagation. This video by Andrej Karpathy is an excellent resource to brush up this topic.
 * Haven't been able to understand the use of docker for server, properly yet.

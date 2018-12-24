@@ -24,7 +24,7 @@ def FrameCapture(path):
   
         if count % 6 == 0:
             # Saves the frames with frame-count 
-            destination = sys.argv[2] + "frame" + str(frameCount)
+            destination = sys.argv[2] + "/frame" + str(frameCount) +'.jpg'
             cv2.imwrite(destination, image) 
             frameCount += 1
   

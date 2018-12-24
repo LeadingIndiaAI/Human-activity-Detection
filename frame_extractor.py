@@ -2,12 +2,14 @@
 # and Extract Frames 
 import cv2 
 import sys
+import os
   
 # Function to extract frames 
 def FrameCapture(path): 
       
     # Path to video file 
-    vidObj = cv2.VideoCapture(path) 
+    vidObj = cv2.VideoCapture(path)
+    os.system("mkdir "+sys.argv[2]) 
   
     # Used as counter variable 
     count = 0

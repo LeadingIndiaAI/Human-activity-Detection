@@ -9,7 +9,7 @@ def FrameCapture(path):
       
     # Path to video file 
     vidObj = cv2.VideoCapture(path)
-    os.system("mkdir "+sys.argv[2]) 
+    os.system("mkdir -p "+sys.argv[2]) 
   
     # Used as counter variable 
     count = 0

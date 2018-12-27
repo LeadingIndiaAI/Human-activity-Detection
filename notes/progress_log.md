@@ -21,7 +21,7 @@
 ## 24 Dec:
 * We have implemented an automated script for frame extraction and it took us 2 days to implement! (Most of the work done by Adarsh)
 * Although Shreedhar sit (SD) told us to do human detection, but we are still confused, Why?
-* We thought of specific objects such as comb in the frame. If there exists a comb in frame, it would increase the probability of the action combing. Although this might result in a increment in the accuracy on the given dataset but do we want a high accuracy on dataset or a general purpose algorithm?
+* We thought of specific objects such as comb in the frame. If there exists a comb in frame, it would increase the probability of the action combing. Although this might result in a increment in the accuracy on the given dataset but do we want a high accuracy on dataset or a general purpose algorithm? (Ans: General purpose)
 * We are thinking of stacking frames at different time along an access and applying a 3D convolution along that axis. I believe this might tackle the problem of time and we might be able to produce some results only by applying conv. net.
 ## 25 Dec:
 * I wanted to start implementing a CNN using keras but got stuck on importing data. No course ever taught the method to import data. So, I decided to contact SD sir for help.

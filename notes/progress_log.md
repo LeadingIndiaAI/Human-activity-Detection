@@ -1,6 +1,6 @@
 # Progress log and Resource section
 ## 17 Dec:
-* We have been assigned the project: **Human Activity Detection** (using video feed)
+* We have been assigned the project: **Human Activity Recognition** (using video feed)
 * Met Dr. Bishwas:
 	* It would be best to limit the frame rate to 5 fps, as beyond this increase in data wouldn't result in increase in useful information.
 ## 18 Dec:

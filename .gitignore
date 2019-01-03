@@ -1,8 +1,2 @@
 dataset/
-frame/
-protoc/
-UCF101.rar
-ucf101/
-UCF-101/
-protobuf-python-3.6.1.tar.gz
-openpose/
+dependencies/

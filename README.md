@@ -8,6 +8,11 @@ projectbu
 |   |-- UCF101
 |   |-- HMDB51
 |
+|-- dependencies
+|   |-- Mask_RCNN
+|
+|-- scripts
+|
 |-- CNN
 ```
 * To extract the frames, run the command below:

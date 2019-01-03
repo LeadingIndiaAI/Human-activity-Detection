@@ -10,7 +10,7 @@ do
     for VIDEO in `ls $CLASS`
     do
       VID=$(echo "$COUNT.avi" | cut -d'.' -f 1)    
-      python $DIR/scrpts/frame_extractor_br.py $DIR/dataset/$CLASS/$VIDEO $DIR/framesBR/$CLASS/$VID
+      python $DIR/scripts/frame_extractor_br.py $DIR/dataset/$CLASS/$VIDEO $DIR/framesBR/$CLASS/$VID
       (( COUNT++ ))
     done
   done

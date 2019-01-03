@@ -17,6 +17,6 @@ projectbu
 ```
 * To extract the frames, run the command below:
 ```
-bash frames.sh     # To extract just the frames
-bash framesbr.sh   # To extract frames with Background Reduction
+bash scripts/frames.sh     # To extract just the frames
+bash scripts/framesbr.sh   # To extract frames with Background Reduction
 ```

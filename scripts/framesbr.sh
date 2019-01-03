@@ -1,5 +1,4 @@
 #! /bin/bash
-cd ..
 DIR=`pwd`
 cd dataset
 for DATASET in `ls`

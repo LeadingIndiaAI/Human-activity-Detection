@@ -24,7 +24,7 @@ def FrameCapture(path):
         # function extract frames 
         success, image = vidObj.read() 
   
-        if count % 6 == 0:
+        if count % 6 == 0 and success:
             # Saves the frames with frame-count 
             destination = sys.argv[2] + "/frame" + str(frameCount) +'.jpg'
             cv2.imwrite(destination, image) 

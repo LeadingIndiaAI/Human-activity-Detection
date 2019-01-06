@@ -14,7 +14,8 @@ projectbu
 |-- scripts
 |
 |-- ALSTM
-|   
+|   |-- autoencoders.py
+|   |-- main_ae.py 
 ```
 * To extract the frames, run the command below:
 ```

@@ -13,7 +13,8 @@ projectbu
 |
 |-- scripts
 |
-|-- CNN
+|-- ALSTM
+|   
 ```
 * To extract the frames, run the command below:
 ```

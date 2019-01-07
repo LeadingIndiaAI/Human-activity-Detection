@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
 from torchvision import transforms, datasets
-import matplotlib.pyplot as plt
 from autoencoders import LinearAutoencoder
 
 img_transforms = transforms.Compose([
@@ -10,7 +9,7 @@ img_transforms = transforms.Compose([
 ])
 
 train_dataset = datasets.ImageFolder(
-    root='./../frames/UCF101/Archery/',
+    root='../dataset/HMDB51(frames)/12/',
     transform=img_transforms
     )
 
@@ -20,18 +19,6 @@ data_loader = torch.utils.data.DataLoader(
     shuffle=True,
     num_workers=4
     )
-
-first_batch, _ = next(iter(data_loader))
-fig = plt.figure(figsize=(12, 6))
-for row in range(1, 4):  
-    for col in range(1, 4):  
-        index = 6 * (row - 1) + col
-        image = first_batch[index - 1, 0, :]
-        fig.add_subplot(3, 6, index)
-        plt.imshow(image.numpy())
-
-        plt.axis('off')
-plt.show()
 
 lae = LinearAutoencoder()
 lr = 2e-3

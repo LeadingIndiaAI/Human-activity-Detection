@@ -13,7 +13,8 @@ DATA_DIR = os.path.join(ROOT_DIR, "dataset")
 # Directory of mask RCNN
 MRCNN_DIR = os.path.join(ROOT_DIR, "dependencies/Mask_RCNN/")
 # Import Mask RCNN
-sys.path.append(os.path.join("MRCNN_DIR")) # To find local version of the library
+# sys.path.append(os.path.join("MRCNN_DIR")) # To find local version of the library
+sys.path.append(MRCNN_DIR) # To find local version of the library
 from mrcnn import utils
 import mrcnn.model as modellib
 # Import COCO config
@@ -52,18 +53,63 @@ class ReadVideo:
 
 class objDetector:
     def __init__(self):
+        class InferenceConfig(coco.CocoConfig):
+            # Set batch size to 1 since we'll be running inference on
+            # one image at a time. Batch size = GPU_COUNT * IMAGES_PER_GPU
+            GPU_COUNT = 1
+            
+            IMAGES_PER_GPU = 1
+
+        config = InferenceConfig()
+        config.display()
         # Create model object in inference mode.
-        model = modellib.MaskRCNN(mode="inference", model_dir=MODEL_DIR, config=config)
+        self.model = modellib.MaskRCNN(mode="inference", model_dir=MODEL_DIR, config=config)
         # Load weights trained on MS-COCO
-        model.load_weights(COCO_MODEL_PATH, by_name=True)
+        self.model.load_weights(COCO_MODEL_PATH, by_name=True)
+        self.class_names = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
+               'bus', 'train', 'truck', 'boat', 'traffic light',
+               'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird',
+               'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear',
+               'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie',
+               'suitcase', 'frisbee', 'skis', 'snowboard', 'sports ball',
+               'kite', 'baseball bat', 'baseball glove', 'skateboard',
+               'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup',
+               'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple',
+               'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza',
+               'donut', 'cake', 'chair', 'couch', 'potted plant', 'bed',
+               'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote',
+               'keyboard', 'cell phone', 'microwave', 'oven', 'toaster',
+               'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors',
+               'teddy bear', 'hair drier', 'toothbrush']
 
+        def apply_mask(image, mask):
+            """Apply the given mask to the image.
+            """
+            for c in range(3):
+                image[:, :, c] = np.where(mask == 0, 0, image[:, :, c])
+            return image
 
+        def detectPerson(image):
+            results = model.detect([image], verbose=1)
+            r = results[0]
+            person_mask = np.array([])
+            for i, class_id in enumerate(r['class_ids']):
+                if class_names[x] == 'person':
+                    mask = r['masks'][:, :, i]
+                    if mk.size == 0:
+                        person_mask = mask.copy()
+                    else:
+                        person_mask += mask
+            masked_img = apply_mask(image, person_mask)
+            return masked_img
 if __name__ == '__main__':
     vid = ReadVideo('HMDB51/1/1.avi')
     frame = None
     stack = None
     success, frame = vid.getFrame()
     cv2.imshow('frame', frame)
+    od = objDetector()
+    cv2.imshow(od.detectPerson(frame))
     frameStack = vid.getFrameStack()
     cv2.imshow('stack', frameStack[0])
     cv2.waitKey(0)

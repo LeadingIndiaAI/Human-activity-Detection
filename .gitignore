@@ -1,4 +1,5 @@
 dataset/
+autoencoder_data/
 dependencies/
 ALSTM/__pycache__/
 frames/

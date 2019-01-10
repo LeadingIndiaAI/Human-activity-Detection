@@ -4,7 +4,7 @@ import os
 import sys
 
 # Root directory of the project
-ROOT_DIR = os.path.abspath("../")
+ROOT_DIR = os.path.abspath("./../")
 
 # Directory of dataset
 DATA_DIR = os.path.join(ROOT_DIR, "dataset")
@@ -51,7 +51,13 @@ class ReadVideo:
         # return array(self.stack)
         return np.asarray(self.stack)
 
-class objDetector:
+class WriteVideo():
+    def __init__(self, destination):
+        self.destination = os.path.join(DATA_DIR, destination)
+        
+    def writeFrame(self, frame):
+        cv2.imwrite(self.destination, frame)
+class ObjDetector:
     def __init__(self):
         class InferenceConfig(coco.CocoConfig):
             # Set batch size to 1 since we'll be running inference on
@@ -82,36 +88,36 @@ class objDetector:
                'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors',
                'teddy bear', 'hair drier', 'toothbrush']
 
-        def apply_mask(image, mask):
-            """Apply the given mask to the image.
-            """
-            for c in range(3):
-                image[:, :, c] = np.where(mask == 0, 0, image[:, :, c])
-            return image
+    def apply_mask(self, image, mask):
+        """Apply the given mask to the image.
+        """
+        for c in range(3):
+            image[:, :, c] = np.where(mask == 0, 0, image[:, :, c])
+        return image
 
-        def detectPerson(image):
-            results = model.detect([image], verbose=1)
-            r = results[0]
-            person_mask = np.array([])
-            for i, class_id in enumerate(r['class_ids']):
-                if class_names[x] == 'person':
-                    mask = r['masks'][:, :, i]
-                    if mk.size == 0:
-                        person_mask = mask.copy()
-                    else:
-                        person_mask += mask
-            masked_img = apply_mask(image, person_mask)
-            return masked_img
-if __name__ == '__main__':
-    vid = ReadVideo('HMDB51/1/1.avi')
-    frame = None
-    stack = None
-    success, frame = vid.getFrame()
-    cv2.imshow('frame', frame)
-    od = objDetector()
-    cv2.imshow(od.detectPerson(frame))
-    frameStack = vid.getFrameStack()
-    cv2.imshow('stack', frameStack[0])
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    def detectPerson(self, image):
+        results = self.model.detect([image], verbose=1)
+        r = results[0]
+        person_mask = np.array([])
+        for i, class_id in enumerate(r['class_ids']):
+            if self.class_names[class_id] == 'person':
+                mask = r['masks'][:, :, i]
+                if person_mask.size == 0:
+                    person_mask = mask.copy()
+                else:
+                    person_mask += mask
+        masked_img = self.apply_mask(image, person_mask)
+        return masked_img
+#if __name__ == '__main__':
+    #vid = ReadVideo('HMDB51/1/1.avi')
+    #frame = None
+    #stack = None
+    #success, frame = vid.getFrame()
+    #cv2.imshow('frame', frame)
+    #od = objDetector()
+    #cv2.imshow(od.detectPerson(frame))
+    #frameStack = vid.getFrameStack()
+    #cv2.imshow('stack', frameStack[0])
+    #cv2.waitKey(0)
+    #cv2.destroyAllWindows()
 

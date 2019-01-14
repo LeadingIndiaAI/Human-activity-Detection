@@ -27,5 +27,8 @@ Other pre-processing techniques that can be used:
 #### Neural Network
 We came up with the following ideas for neural network (need some time to implement them):
 * 3D CNN with time axis
+** Was the first idea we wanted to implement, however due to difference in no. of frames, we were having some difficulties
 * CNN to RNN combination
+** We used a pretrained inception v3 model right until the softmax layer and then used the features extracted to feed into a simgle layer LSTM followed by 101 output nodes.
+** achieved accuracy of 67.83 % but we need to work a bit more on it to shoot the accuracy.
 * Autoencoders to RNN
